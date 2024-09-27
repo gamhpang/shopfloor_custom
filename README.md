@@ -31,7 +31,7 @@ The custom ShopFloor Control module consists of the following key components:
 
 To install the ShopFloor Control module:
 
-1. Download the `shopfloor_control` module and place it in your Odoo 15 `addons` folder.
+1. Download the `shopfloor` module and place it in your Odoo 15 `addons` folder.
 2. Update your Odoo apps list by navigating to **Apps** > **Update Apps List** in the Odoo backend.
 3. Search for `ShopFloor Control` in the Apps list and click **Install**.
 
