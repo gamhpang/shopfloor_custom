@@ -1,0 +1,48 @@
+<odoo>
+  <data>
+    <record id="mrp_production_workorder_tree_editable_view_inherit" model="ir.ui.view">
+      <field name="name">work.order.treeview.inherit</field>
+      <field name="model">mrp.workorder</field>
+      <field name="inherit_id" ref="mrp.mrp_production_workorder_tree_editable_view"/>
+      <field name="arch" type="xml">
+        <field name="product_id" position="after">
+          <field name="operator_id" optional="show"/>
+          <field name="work_progress" optional="show"/>
+          <field name="material_usage" optional="show"/>
+        </field>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="mrp_workorder_worksheet_form">
+        <field name="name">work.order.form</field>
+        <field name="model">mrp.workorder</field>
+        <field name="arch" type="xml">
+          <form readonly="1" create="false" edit="false">
+            <script>
+                    $(document).ready(function(){
+                    $(".modal-footer").hide();
+                    });
+                </script>
+            
+                  <field name="worksheet_type" invisible="1"/>
+                  <field name="worksheet" widget="pdf_viewer" attrs="{'invisible': [('worksheet_type', '!=', 'pdf')]}"/>
+                  <field name="worksheet_google_slide" widget="embed_viewer" attrs="{'invisible': [('worksheet_type', '!=', 'google_slide')]}"/>
+                  <field name="operation_note" attrs="{'invisible': [('worksheet_type', '!=', 'text')]}"/>
+          </form>
+
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="mrp_workorder_worksheet_form_action">
+        <field name="name">Work Orders</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">mrp.workorder</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="mrp_workorder_worksheet_form"/>
+    </record>
+
+
+
+  </data>
+</odoo>

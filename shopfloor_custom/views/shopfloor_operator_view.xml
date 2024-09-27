@@ -1,0 +1,13 @@
+<odoo>
+    <template id="shopfloor_operator_template" name="Shopfloor Operator Control">
+        <div class="o_shopfloor_control">
+            <t t-foreach="workorders" t-as="workorder">
+                <div class="workorder">
+                    <span t-esc="workorder.name"/>
+                    <button t-if="workorder.state == 'ready'" t-on-click="startWorkOrder(workorder)">Start</button>
+                    <button t-if="workorder.state == 'progress'" t-on-click="completeWorkOrder(workorder)">Complete</button>
+                </div>
+            </t>
+        </div>
+    </template>
+</odoo>

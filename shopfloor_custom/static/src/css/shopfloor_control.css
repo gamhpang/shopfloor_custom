@@ -1,0 +1,71 @@
+.shopfloor-container {
+    margin-left: 20px; /* Space on the left */
+    max-width: 100%; /* Allow full width */
+    height:2000% !important;
+}
+
+.workorders-list {
+    display: flex;
+    flex-wrap: wrap; /* Wrap work orders to the next line if they overflow */
+}
+
+.workorder-card {
+    flex: 0 0 250px; /* Set a fixed width for each card */
+    margin-right: 10px; /* Space between cards */
+    margin-bottom: 10px; /* Space between rows */
+}
+
+.card {
+	min-width: 350px;
+    width: 100%; /* Ensure the card takes full width of its container */
+    min-height: 50px; /* Minimum height for visual consistency */
+}
+
+
+/* Optional: reduce the spacing between buttons */
+.btn-sm {
+    padding: 5px 10px; /* Smaller padding for smaller buttons */
+    font-size: 0.875rem; /* Adjust font size for readability */
+    margin-right: 10px;
+}
+
+/* Ensure buttons stack vertically with some spacing */
+.d-flex.flex-column button {
+    margin-bottom: 8px; /* Add space between the buttons */
+}
+
+
+/* Styling for the operator selection section */
+.operator-selection-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.operator-selection-label {
+    font-weight: bold;
+    min-width: 100px;
+    margin-right: 1rem;
+    margin-top: 1rem;
+}
+
+.operator-selection-dropdown {
+    width: 200px;
+    margin-right: 1.5rem;
+    border-radius: 5px;
+}
+
+/* Additional spacing and layout adjustments for buttons */
+.operator-buttons .btn {
+    margin-right: 10px;
+}
+
+
+.search-box {
+    border-radius: 25px;
+    padding: 10px;
+    font-size: 1.2rem;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    margin-left: 10px;
+    margin-top: 5px;
+}

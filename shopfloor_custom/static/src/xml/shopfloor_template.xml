@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <templates xml:space="preserve">
+        <t t-name="ShopFloorControlTemplate" owl="1">
+            <div class="shopfloor-container p-3">
+                
+
+                <!-- Add the All MO and In Progress buttons next to the existing buttons -->
+                <div class="d-flex mb-3">
+                    <label for="operator-select" class="operator-selection-label">Select Operator:</label>
+                    <select id="operator-select" class="form-select operator-selection-dropdown" t-on-change="changeOperator">
+                        <option t-foreach="state.operators" t-as="operator" t-key="operator.id" 
+                                t-att-value="operator.id"
+                                t-att-selected="state.selectedOperatorId == operator.id ? 'selected' : null">
+                            <t t-esc="operator.name"/>
+                        </option>
+                    </select>
+
+                    <!-- All MO Button -->
+                    <button class="btn btn-secondary btn-lg me-2" t-on-click="() => filterWorkOrders('all')" style="margin-right: 10px;">All MO</button>
+
+                    <!-- In Progress Button -->
+                    <button class="btn btn-info btn-lg me-2" t-on-click="() => filterWorkOrders('in_progress')">In Progress</button>
+
+                    <!-- Search Box -->
+                    <input type="text" class="form-control ms-2 search-box" 
+                           placeholder="Search by Work Order Name..." 
+                           t-on-keydown="onSearchKeydown"
+                           t-att-value="state.searchQuery" 
+                           style="max-width: 300px;" />
+                </div>
+
+                <h1 class="text-center mb-4">Operator's Work Orders</h1>
+
+                <!-- Work orders displayed in horizontal flex layout -->
+                <div class="workorders-list d-flex flex-wrap">
+                    <t t-foreach="filteredWorkorders" t-as="workorder" t-key="workorder.id">
+                        <div class="workorder-card">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <span t-esc="workorder.production_id[1]"/> - <span t-esc="workorder.name" style="margin-right: 10px;"/>
+                                        <span class="badge bg-secondary" t-esc="workorder.state"/>
+                                        <!-- <button class="btn btn-sm btn-info ms-2" t-on-click="() => showWorksheet(workorder)">
+                                            <i class="fa fa-eye"></i>
+                                        </button> -->
+                                        <!-- Flex container to align duration and play/pause button in one row -->
+                                        <div class="d-flex align-items-center ms-2">
+                                            
+                                            <!-- Play and Pause buttons in the same row -->
+                                            <t t-if="workorder.state === 'progress'">
+                                                <t t-if="workorder.is_user_working">
+                                                    <button class="btn btn-warning btn-sm" t-on-click="() => pauseWorkOrder(workorder)">
+                                                        <i class="fa fa-pause"></i> 
+                                                    </button>
+                                                </t>
+
+                                                <!-- Show play icon if workorder is in progress and paused is true -->
+                                                <t t-if="!workorder.is_user_working">
+                                                    <button class="btn btn-primary btn-sm" t-on-click="() => playWorkOrder(workorder)">
+                                                        <i class="fa fa-play"></i> 
+                                                    </button>
+                                                </t>
+                                            </t>
+                                            <!-- Display real duration beside the state -->
+                                            <span t-if="workorder.state === 'progress'" style="margin-left: 10px;"> <!-- Add margin between duration and button -->
+                                                Duration: <span t-esc="workorder.formatted_duration"/>
+                                            </span>
+                                        </div>
+
+                                    </h5>
+
+
+                                    <!-- Buttons arranged vertically (line by line) -->
+                                    <div class="d-flex flex-column">
+
+                                        <div t-if="workorder.state === 'ready' or workorder.state === 'progress'" class="mt-3">
+                                            <button class="btn btn-lg btn-info ms-2" t-on-click="() => showWorksheet(workorder)">
+                                                <span>Worksheet </span><i class="fa fa-eye"></i>
+                                            </button>
+                                        </div>
+                                        <div t-if="workorder.state === 'ready'" class="mt-3">
+                                            <button class="btn btn-primary btn-lg mb-2" t-on-click="() => startWorkOrder(workorder)">Start Work Order</button>
+                                        </div>
+                                        <t t-if="workorder.state === 'progress'">
+                                        <div class="mt-3">
+                                            <button class="btn btn-success btn-lg mb-2" t-on-click="() => completeWorkOrder(workorder)" style="margin-right: 10px;">Complete Work Order</button>
+                                            <button class="btn btn-lg btn-light ms-2" t-on-click="() => showMegaMenu(workorder)">
+                                                <i class="fa fa-ellipsis-v"></i>
+                                            </button>
+                                        </div>
+                                        
+                                        </t>
+                                        <!-- Button to close Manufacturing Order if workorder is finished -->
+                                        <div t-if="workorder.state === 'done'" class="mt-3">
+                                            <div t-if="workorder.production_state !== 'done'" class="mt-3">
+                                                <button class="btn btn-danger btn-lg" t-on-click="() => closeManufacturingOrder(workorder)">
+                                                    Close Manufacturing Order
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+            </div>
+        </t>
+    </templates>
+</odoo>

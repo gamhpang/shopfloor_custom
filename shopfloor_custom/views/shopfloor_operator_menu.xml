@@ -1,0 +1,19 @@
+<odoo>
+    <!-- Action for the Operator View -->
+    <record id="action_shopfloor_operator_view" model="ir.actions.client">
+        <field name="name">Operator View</field>
+        <field name="tag">shopfloor_operator_interface</field>
+    </record>
+    
+    <!-- Shopfloor Control App Menu -->
+    <menuitem id="shopfloor_control_menu" name="Shop Floor" sequence="146" web_icon="Shopfloor_custom,static/description/icon.png" />
+    
+    <!-- Shopfloor Control Operator Menu -->
+    <menuitem id="shopfloor_operator_menu" 
+              name="Operator Control" 
+              parent="shopfloor_control_menu" 
+              action="action_shopfloor_operator_view" 
+              sequence="10"/>
+    
+    
+</odoo>
