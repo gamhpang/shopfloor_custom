@@ -42,7 +42,7 @@ To install the ShopFloor Control module:
    - Assign operators to work orders to ensure they only see work orders relevant to them on the ShopFloor interface.
    
 2. **Work Order Visibility**:
-   - Operators can log into the system and only see work orders assigned to them.
+   - Operators can log into the system and see work orders assigned to them.
    - The system provides real-time updates on work order progress, making it easy to track and manage tasks directly from the shop floor.
 
 ## Usage
